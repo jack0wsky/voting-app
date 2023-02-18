@@ -4,15 +4,19 @@
     <input
       class="input-wrapper__input"
       :placeholder="placeholder"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      :value="value"
+      @input="$emit('update:modelValue', value)"
     />
   </label>
 </template>
 
 <script setup lang="ts">
-defineProps(["modelValue", "placeholder", "label"]);
+import { ref } from "vue";
+
+const props = defineProps(["modelValue", "placeholder", "label"]);
 defineEmits(["update:modelValue"]);
+
+const value = ref(props.modelValue);
 </script>
 
 <style scoped lang="scss">
