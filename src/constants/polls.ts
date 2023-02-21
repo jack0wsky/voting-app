@@ -3,6 +3,7 @@ import {
   OptionBuilder,
   VoterBuilder,
 } from "@/builders/voter.builder";
+import type { IPoll } from "@/types/poll";
 
 const pizzaPoll = new PollBuilder();
 const travelPoll = new PollBuilder();
@@ -17,7 +18,7 @@ export const USERS = [
   new VoterBuilder("Victoria"),
 ];
 
-export const POLLS = [
+export const POLLS: IPoll[] = [
   pizzaPoll
     .withTopic("Which pizza?")
     .createdBy("Jack")

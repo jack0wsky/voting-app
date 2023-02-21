@@ -34,7 +34,7 @@ export class PollBuilder implements IPoll {
   id: string;
   topic: string;
   author: string;
-  options: OptionBuilder[];
+  options: IOption[];
 
   withTopic(topic: string) {
     this.topic = topic;

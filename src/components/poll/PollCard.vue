@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import type { IPoll } from "@/types/poll";
-import { store } from "@/store/store";
+import { usePollsStore } from "@/store/store";
 import PollOption from "@/components/poll/PollOption.vue";
 
 interface Props {
@@ -25,6 +25,8 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+const store = usePollsStore();
 
 const sortedOptions = ref(props.poll.options);
 

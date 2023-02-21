@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 import type { IPoll } from "@/types/poll";
-import { store } from "@/store/store";
+import { usePollsStore } from "@/store/store";
 import { v4 as uuidv4 } from "uuid";
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
@@ -15,6 +15,8 @@ const form = reactive<IFormValues>({
   options: [],
 });
 const option = ref("");
+
+const store = usePollsStore();
 
 const addOption = (newOption: string) => {
   form.options = [
