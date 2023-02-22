@@ -16,9 +16,9 @@
 
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import type { IPoll } from "@/types/poll";
-import { usePollsStore } from "@/store/store";
-import PollOption from "@/components/poll/PollOption.vue";
+import type { IPoll } from "@/modules/votes/poll.types";
+import { usePollsStore } from "@/modules/votes/polls.store";
+import PollOption from "@/modules/votes/PollOption.vue";
 
 interface Props {
   poll: IPoll;

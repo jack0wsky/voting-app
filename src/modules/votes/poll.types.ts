@@ -1,6 +1,8 @@
+import type { User } from "firebase/auth";
+
 export interface IVote {
   id: string;
-  user: string;
+  user: Pick<User, "displayName" | "photoURL" | "uid">;
 }
 
 export interface IOption {

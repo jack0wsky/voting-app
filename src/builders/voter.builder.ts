@@ -1,14 +1,14 @@
-import type { IVote, IOption, IPoll } from "@/types/poll";
+import type { IVote, IOption, IPoll } from "@/modules/votes/poll.types";
 import { v4 as uuid } from "uuid";
 
 export class VoterBuilder implements IVote {
-  constructor(username: string) {
+  constructor(uid: string, displayName: string, photoURL: string) {
     this.id = uuid();
-    this.user = username;
+    this.user = { uid, displayName, photoURL };
   }
 
-  id: string;
-  user: string;
+  id;
+  user;
 }
 
 export class OptionBuilder implements IOption {

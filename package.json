@@ -11,6 +11,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "firebase": "^9.17.1",
     "pinia": "^2.0.32",
     "uuid": "^9.0.0",
     "vue": "^3.2.45",
@@ -18,7 +19,7 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
-    "@types/node": "^18.11.12",
+    "@types/node": "^18.14.0",
     "@types/uuid": "^9.0.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-prettier": "^7.0.0",

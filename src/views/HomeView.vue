@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { usePollsStore } from "@/store/store";
-import PollCard from "@/components/poll/PollCard.vue";
+import { usePollsStore } from "@/modules/votes/polls.store";
+import PollCard from "@/modules/votes/PollCard.vue";
 
 const store = usePollsStore();
 </script>

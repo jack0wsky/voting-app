@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
-import type { IPoll } from "@/types/poll";
-import { usePollsStore } from "@/store/store";
+import type { IPoll } from "@/modules/votes/poll.types";
+import { usePollsStore } from "@/modules/votes/polls.store";
 import { v4 as uuidv4 } from "uuid";
-import BaseInput from "@/components/base/BaseInput.vue";
-import BaseButton from "@/components/base/BaseButton.vue";
+import BaseInput from "@/modules/shared/BaseInput.vue";
+import BaseButton from "@/modules/shared/BaseButton.vue";
 
 type IFormValues = IPoll;
 

@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import type { IOption } from "@/types/poll";
-import BaseButton from "@/components/base/BaseButton.vue";
+import { useUserStore } from "@/modules/user/user.store";
+import type { IOption } from "@/modules/votes/poll.types";
+import BaseButton from "@/modules/shared/BaseButton.vue";
 import { USERS } from "@/constants/polls";
 
 const props = defineProps<{ option: IOption; totalVotes: number }>();
 defineEmits(["vote"]);
 
+const currentUser = useUserStore();
+
 const hasAlreadyVoted = ref(false);
-const votes = ref(props.option.votes.map((vote) => vote.user.slice(0, 1)));
 
 const progressWidth = computed(() => {
   return `${(props.option.votes.length / USERS.length) * 100}%`;
@@ -16,9 +18,11 @@ const progressWidth = computed(() => {
 
 watch(props.option.votes, (value) => {
   const users = value.map((vote) => vote.user);
-  hasAlreadyVoted.value = users.includes("Francesco");
+  if (!currentUser.user) return (hasAlreadyVoted.value = false);
 
-  votes.value = users.map((user) => user.slice(0, 1));
+  hasAlreadyVoted.value = users
+    .map((user) => user.displayName)
+    .includes(currentUser.user.displayName || "");
 });
 </script>
 
@@ -32,19 +36,29 @@ watch(props.option.votes, (value) => {
       </div>
 
       <div class="option__voters">
-        <div class="option__voter" v-for="voter in votes" :key="voter">
-          {{ voter }}
+        <div
+          class="option__voter"
+          v-for="voter in props.option.votes"
+          :key="voter.id"
+        >
+          <img
+            class="option__voter-avatar"
+            v-if="!!voter.user.photoURL"
+            :src="voter.user.photoURL"
+            :alt="voter.user.displayName"
+          />
+          <p v-else>{{ voter.user.displayName.slice(0, 1) }}</p>
         </div>
       </div>
     </div>
 
     <base-button
-      v-if="!hasAlreadyVoted"
+      v-if="!hasAlreadyVoted && !!currentUser.user"
       variant="secondary"
       @click="$emit('vote', option.id)"
       >Vote</base-button
     >
-    <p v-else>Voted 🎉</p>
+    <p v-if="hasAlreadyVoted && !currentUser.user">Voted 🎉</p>
   </li>
 </template>
 
@@ -89,11 +103,17 @@ watch(props.option.votes, (value) => {
     height: 32px;
     justify-content: center;
     margin-left: -6px;
+    overflow: hidden;
     width: 32px;
 
     &:first-child {
       margin-left: 0 !important;
     }
+  }
+
+  &__voter-avatar {
+    height: 100%;
+    width: 100%;
   }
 }
 </style>

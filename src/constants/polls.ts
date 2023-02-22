@@ -3,19 +3,19 @@ import {
   OptionBuilder,
   VoterBuilder,
 } from "@/builders/voter.builder";
-import type { IPoll } from "@/types/poll";
+import type { IPoll } from "@/modules/votes/poll.types";
 
 const pizzaPoll = new PollBuilder();
 const travelPoll = new PollBuilder();
 const bestCarPoll = new PollBuilder();
 
 export const USERS = [
-  new VoterBuilder("James"),
-  new VoterBuilder("Brad"),
-  new VoterBuilder("Jack"),
-  new VoterBuilder("Anna"),
-  new VoterBuilder("Camille"),
-  new VoterBuilder("Victoria"),
+  new VoterBuilder("1", "James", ""),
+  new VoterBuilder("2", "Brad", ""),
+  new VoterBuilder("3", "Jack", ""),
+  new VoterBuilder("4", "Anna", ""),
+  new VoterBuilder("5", "Camille", ""),
+  new VoterBuilder("6", "Victoria", ""),
 ];
 
 export const POLLS: IPoll[] = [
