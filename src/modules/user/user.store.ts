@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-import type { User } from "firebase/auth";
+import type { IUserReadModel } from "@/modules/user/user.types";
+import { mapUserDtoToReadModel } from "@/modules/user/mapper";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -9,7 +10,7 @@ import {
 import { firebaseApp } from "@/services/firebase";
 
 interface IUserState {
-  user: User | null;
+  user: IUserReadModel | null;
 }
 
 const auth = getAuth(firebaseApp);
@@ -22,10 +23,12 @@ export const useUserStore = defineStore("user", {
   actions: {
     async login() {
       const data = await signInWithPopup(auth, googleProvider);
-      this.user = data.user;
+      this.user = mapUserDtoToReadModel(data.user);
     },
     async getUserData() {
-      this.user = await auth.currentUser;
+      const userDto = await auth.currentUser;
+      if (!userDto) return;
+      this.user = mapUserDtoToReadModel(userDto);
     },
     async logout() {
       signOut(auth).then(() => {

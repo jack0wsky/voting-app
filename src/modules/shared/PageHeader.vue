@@ -21,8 +21,8 @@ onMounted(() => {
       <div v-if="!!userStore.user" class="header__user">
         <div class="header__user-avatar">
           <img
-            :src="userStore.user.photoURL"
-            :alt="userStore.user.displayName"
+            :src="userStore.user.photoURL || ''"
+            :alt="userStore.user.displayName || ''"
           />
         </div>
         <button @click="userStore.logout()">Logout</button>

@@ -41,13 +41,15 @@ watch(props.option.votes, (value) => {
           v-for="voter in props.option.votes"
           :key="voter.id"
         >
-          <img
-            class="option__voter-avatar"
-            v-if="!!voter.user.photoURL"
-            :src="voter.user.photoURL"
-            :alt="voter.user.displayName"
-          />
-          <p v-else>{{ voter.user.displayName.slice(0, 1) }}</p>
+          <div v-if="!!voter.user">
+            <img
+              class="option__voter-avatar"
+              v-if="!!voter.user.photoURL"
+              :src="voter.user.photoURL || ''"
+              :alt="voter.user.displayName || ''"
+            />
+            <p v-else>{{ (voter.user.displayName || "").slice(0, 1) }}</p>
+          </div>
         </div>
       </div>
     </div>
