@@ -1,6 +1,6 @@
 <template>
   <label class="input-wrapper">
-    <span>{{ label }}</span>
+    <span class="input-wrapper__label">{{ label }}</span>
     <input
       class="input-wrapper__input"
       :placeholder="placeholder"
@@ -24,12 +24,23 @@ const value = ref(props.modelValue);
   display: flex;
   flex-flow: column;
 
+  &__label {
+    margin-bottom: 4px;
+  }
+
   &__input {
-    background-color: #2c3e50;
+    background-color: transparent;
     border: none;
+    outline: 1px solid #876d00;
+    font-size: 1em;
     max-width: 200px;
-    padding: 5px 10px;
+    padding: 10px 20px;
     width: 100%;
+
+    &:active,
+    &:focus {
+      outline: 1px solid #ecbb20;
+    }
   }
 }
 </style>
